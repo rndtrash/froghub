@@ -79,17 +79,12 @@ print("It's wednesday, my dudes! AAAAAAAAAAAAAAAAAAAAAAAAAAAAA!")
 if (len(getBlogs(config["MySpace"]["id"])) == int(config["MySpace"]["max_posts"])):
 	removeBlog(config["MySpace"]["id"], config["MySpace"]["delete_on_overflow"])
 
-config["General"]["last_post"] = str(int(config["General"]["last_post"]) + 1)
-
 content_line = ""
-with open("posts.txt", "r+") as f:
+with open("posts.txt", "r") as f:
 	lines = f.readlines()
-	content_line = lines.pop(0)
-	
-	f.seek(0)
-	for i in lines:
-		f.write(i)
-	f.truncate()
+	content_line = lines.pop(int(config["General"]["last_post"]))
+
+config["General"]["last_post"] = str(int(config["General"]["last_post"]) + 1)
 
 post_title = "Wednesday post №{}".format(config["General"]["last_post"])
 
