@@ -54,6 +54,7 @@ def saveConfig():
 		config.write(configfile)
 
 def shutDown():
+	saveConfig()
 	logOut()
 	sys.exit(0)
 
@@ -94,6 +95,4 @@ with open(config["General"]["archive"], "a") as f:
 postBlog(post_title, content_line)
 
 config["General"]["posted_today"] = str(1)
-saveConfig()
-
 shutDown()
